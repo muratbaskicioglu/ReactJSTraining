@@ -10,10 +10,24 @@ const helloWorld = <div>Hello World</div>
 // When we want to reuse code and parameterize that code we use a function.
 // This is a arrow function which takes a parameter as an object.
 const message = (props) => <div>{props.msg}</div>
+// You can call this component function with React.createElement method.
+// Pass the function name for the first parameter and pass props to the second parameter.
+// Or you can do shorter way with JSX just writing component name and writing props next to it.
+// If you write component name lowercase, babel pass the name in double quotes.
+// In JSX world you have to capitalize first letter of components name.
+// And then babel transpile it as an object not a string in double quotes.
+// Ex: <message /> Babel transpile this like React.createElement("message", props...)
+// This message element cannot be found in html tags.
+// Ex: <Message /> Babel transpile this like React.createElement(Message, props...)
+// So you can see it passed component name as an object. Then React calls our function.
+const Message = props => <div>{props.msg}{props.children}</div>
 const element = (
 	<div className="container">
 		{helloWorld}
-		{message({msg: 'Goodbye World'})}
+		{React.createElement(message, {msg: 'Goodbye World'})}
+		<message msg="This element cannot be found!" />
+		<Message msg="This calls our component function." />
+		<Message>We can use children prop like regular HTML child.</Message>
 	</div>
 )
 ReactDOM.render(element, rootElement)
