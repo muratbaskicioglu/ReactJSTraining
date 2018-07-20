@@ -1,0 +1,20 @@
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.js"></script>
+<script type="text/babel">
+const rootElement = document.getElementById('root')
+// If you don't wanna repeat yourselves. You can extract same codes into a variable.
+const helloWorld = <div>Hello World</div>
+// Then you can just interpolate this directly in JSX.
+// When we want to reuse code and parameterize that code we use a function.
+// This is a arrow function which takes a parameter as an object.
+const message = (props) => <div>{props.msg}</div>
+const element = (
+	<div className="container">
+		{helloWorld}
+		{message({msg: 'Goodbye World'})}
+	</div>
+)
+ReactDOM.render(element, rootElement)
+</script>
